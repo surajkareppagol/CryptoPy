@@ -3,12 +3,14 @@ import json
 from rich.console import Console
 from rich.panel import Panel
 
-from crypto import ceasar_cipher
+from crypto import *
 
 with open("src/crypto.json", "r") as file:
     data = json.loads(file.read())
 
 console = Console()
+
+console.clear()
 
 back = False
 
@@ -18,16 +20,17 @@ console.print(
     )
 )
 
-console.print(Panel("1. Ceasar Cipher\n2. RSA"))
+console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
 
 
 while True:
-    option = console.input("1. 📋 Get Info ┆ 2. 🔑 Encypt ┆ 3. 🔓 Decrypt\n👉 Choice: ")
+    option = console.input("\n1. 📋 Get Info ┆ 2. 🔑 Encypt ┆ 3. 🔓 Decrypt\n👉 Choice: ")
 
     # Get info
     if option == "1":
         console.clear()
-        choice = int(console.input("1. Ceasar Cipher\n\n👉 Choice: ")) - 1
+        console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+        choice = int(console.input("\n\n👉 Choice: ")) - 1
 
         console.print(
             Panel(
@@ -39,40 +42,55 @@ while True:
     # Encrypt
     elif option == "2":
         console.clear()
-        choice = int(console.input("1. Ceasar Cipher\n\n👉 Choice: ")) - 1
+        console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+        choice = int(console.input("\n\n👉 Choice: ")) - 1
+
+        console.print(
+            Panel(
+                f"[green bold]{data['data'][choice]['title'].capitalize()}[/green bold]"
+            )
+        )
 
         if choice == 0:
-            console.print(
-                Panel(
-                    f"[green bold]{data['data'][choice]['title'].capitalize()}[/green bold]"
-                )
-            )
             plain_text = console.input("⌨️ Enter input text: ")
             shift = int(console.input("⚙️ Enter shift value: "))
-
             cipher_text = ceasar_cipher(text=plain_text, shift=shift)
 
-            console.print(
-                Panel(f"The encrypted text is: [green bold]{cipher_text}[/green bold]")
-            )
+        elif choice == 1:
+            plain_text = console.input("⌨️ Enter input text: ")
+            key_text = console.input("🔑 Enter the key: ")
+            cipher_text = vigenere_cipher(text=plain_text, key=key_text)
+
+        console.print(
+            Panel(f"The encrypted text is: [green bold]{cipher_text}[/green bold]")
+        )
 
     # Decrypt
     elif option == "3":
         console.clear()
+        console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+        choice = int(console.input("\n\n👉 Choice: ")) - 1
         mode = "decrypt"
-        choice = console.input("1. Ceasar Cipher\n\n👉 Choice: ")
 
-        if choice == "1":
-            console.print(Panel("[green bold]Ceasar Cipher[/green bold]"))
+        console.print(
+            Panel(
+                f"[green bold]{data['data'][choice]['title'].capitalize()}[/green bold]"
+            )
+        )
+
+        if choice == 0:
             cipher_text = console.input("⌨️ Enter cipher text: ")
             shift = int(console.input("⚙️ Enter shift value: "))
-
             plain_text = ceasar_cipher(mode=mode, text=cipher_text, shift=shift)
 
-            console.print(
-                Panel(f"The decrypted text is: [green bold]{plain_text}[/green bold]")
-            )
+        elif choice == 1:
+            cipher_text = console.input("⌨️ Enter input text: ")
+            key_text = console.input("🔑 Enter the key: ")
+            plain_text = vigenere_cipher(mode=mode, text=cipher_text, key=key_text)
 
+        console.print(
+            Panel(f"The decrypted text is: [green bold]{plain_text}[/green bold]")
+        )
     else:
         console.clear()
         break
