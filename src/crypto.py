@@ -1,20 +1,14 @@
-def ceasar_cipher(mode="encrypt", plain_text="", cipher_text="", shift=3):
+def ceasar_cipher(mode="encrypt", text="", shift=3):
     alphabets = "abcdefghijklmnopqrstuvwxyz"
 
-    if mode == "encrypt":
-        cipher_text = ""
-        for letter in plain_text:
-            if letter.isalpha():
-                cipher_text += alphabets[alphabets.index(letter) + shift % 26]
-            else:
-                cipher_text += letter
-        return cipher_text
+    encrypt = True if mode == "encrypt" else False
 
-    elif mode == "decrypt":
-        plain_text = ""
-        for letter in plain_text:
-            if letter.isalpha():
-                plain_text += alphabets[alphabets.index(letter) - shift % 26]
-            else:
-                plain_text += letter
-        return "abcd"
+    result_text = ""
+    for letter in text:
+        if letter.isalpha() and encrypt:
+            result_text += alphabets[alphabets.index(letter) + shift % 26]
+        elif letter.isalpha() and not encrypt:
+            result_text += alphabets[alphabets.index(letter) - shift % 26]
+        else:
+            result_text += letter
+    return result_text
