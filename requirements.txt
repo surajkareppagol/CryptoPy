@@ -1,0 +1,8 @@
+autopep8       2.0.4
+markdown-it-py 3.0.0
+mdurl          0.1.2
+pip            23.2.1
+pycodestyle    2.11.1
+Pygments       2.17.2
+rich           13.7.0
+setuptools     65.5.0
