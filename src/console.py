@@ -20,7 +20,7 @@ console.print(
     )
 )
 
-console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher\n3. Transposition Cipher"))
 
 
 while True:
@@ -29,9 +29,12 @@ while True:
     # Get info
     if option == "1":
         console.clear()
-        console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+        console.print(
+            Panel("1. Ceasar Cipher\n2. Vigenère cipher\n3. Transposition Cipher")
+        )
         choice = int(console.input("\n\n👉 Choice: ")) - 1
 
+        console.clear()
         console.print(
             Panel(
                 f"[green bold]{data['data'][choice]['title'].capitalize()}[/green bold]"
@@ -42,7 +45,9 @@ while True:
     # Encrypt
     elif option == "2":
         console.clear()
-        console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+        console.print(
+            Panel("1. Ceasar Cipher\n2. Vigenère cipher\n3. Transposition Cipher")
+        )
         choice = int(console.input("\n\n👉 Choice: ")) - 1
 
         console.print(
@@ -61,6 +66,11 @@ while True:
             key_text = console.input("🔑 Enter the key: ")
             cipher_text = vigenere_cipher(text=plain_text, key=key_text)
 
+        elif choice == 2:
+            plain_text = console.input("⌨️ Enter input text: ")
+            key_text = console.input("🔑 Enter the key: ")
+            cipher_text = transposition_cipher(text=plain_text, key=key_text)
+
         console.print(
             Panel(f"The encrypted text is: [green bold]{cipher_text}[/green bold]")
         )
@@ -68,7 +78,9 @@ while True:
     # Decrypt
     elif option == "3":
         console.clear()
-        console.print(Panel("1. Ceasar Cipher\n2. Vigenère cipher"))
+        console.print(
+            Panel("1. Ceasar Cipher\n2. Vigenère cipher\n3. Transposition Cipher")
+        )
         choice = int(console.input("\n\n👉 Choice: ")) - 1
         mode = "decrypt"
 
@@ -87,6 +99,11 @@ while True:
             cipher_text = console.input("⌨️ Enter input text: ")
             key_text = console.input("🔑 Enter the key: ")
             plain_text = vigenere_cipher(mode=mode, text=cipher_text, key=key_text)
+
+        elif choice == 2:
+            cipher_text = console.input("⌨️ Enter input text: ")
+            key_text = console.input("🔑 Enter the key: ")
+            plain_text = transposition_cipher(mode=mode, text=cipher_text, key=key_text)
 
         console.print(
             Panel(f"The decrypted text is: [green bold]{plain_text}[/green bold]")
