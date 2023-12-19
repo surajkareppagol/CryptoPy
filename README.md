@@ -4,6 +4,8 @@ A collection of `cryptography` programs written in python.
 
 ![cryptoPy](https://github.com/surajkareppagol/assets-for-projects/blob/main/cryptoPy.gif)
 
+At this stage it contains `Ceasar Cipher`, `Vigenère cipher`, `Transposition Cipher` (decryption scheme is not implemented yet for transposition matrix).
+
 ## Usage
 
 As the first step clone the repo,
